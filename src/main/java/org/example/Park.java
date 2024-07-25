@@ -2,9 +2,11 @@ package org.example;
 
 public class Park {
     private final int parkSite;
+
     public Park(int parkSite) {
         this.parkSite = parkSite;
     }
+
     public class Attraction {
         private final String name;
         private final String workHours;
