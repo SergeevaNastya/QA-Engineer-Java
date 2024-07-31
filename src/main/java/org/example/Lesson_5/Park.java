@@ -1,10 +1,15 @@
-package org.example;
+package org.example.Lesson_5;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Park {
     private final int parkSite;
+    private final List<Attraction> attractions;
 
-    public Park(int parkSite) {
+    public Park(int parkSite, List<Attraction> attractions) {
         this.parkSite = parkSite;
+        this.attractions = attractions;
     }
 
     public class Attraction {
@@ -24,8 +29,12 @@ public class Park {
     }
 
     public static void main(String[] args) {
-        Park park = new Park(4);
+        List<Attraction> attractions = new ArrayList<>();
+        Park park = new Park(4, attractions);
         Attraction wheel = park.new Attraction("Колесо", "10:00 - 18:00", 15);
-        wheel.printInfoAttraction();
+        attractions.add(wheel);
+        for (Attraction attraction : park.attractions) {
+            attraction.printInfoAttraction();
+        }
     }
 }
