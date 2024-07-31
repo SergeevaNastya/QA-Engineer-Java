@@ -1,27 +1,20 @@
 package org.example.Lesson_5;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Park {
     private final int parkSite;
     private final List<Attraction> attractions;
 
-    public Park(int parkSite, List<Attraction> attractions) {
-        this.parkSite = parkSite;
-        this.attractions = attractions;
-    }
-
+    @Data
     public class Attraction {
         private final String name;
         private final String workHours;
         private final int price;
-
-        public Attraction(String name, String workHours, int price) {
-            this.name = name;
-            this.workHours = workHours;
-            this.price = price;
-        }
 
         public void printInfoAttraction() {
             System.out.println("Название: " + name + "\nЧасы работы: " + workHours + "\nСтоимость: " + price + "\nПлощадка: " + parkSite);

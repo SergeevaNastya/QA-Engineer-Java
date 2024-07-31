@@ -1,5 +1,8 @@
 package org.example.Lesson_5;
 
+import lombok.Data;
+
+@Data
 public class Employee {
     private final String lastName;
     private final String firstName;
@@ -9,17 +12,6 @@ public class Employee {
     private final String phoneNumber;
     private final int salary;
     private final int age;
-
-    public Employee(String lastName, String firstName, String middleName, String position, String email, String phoneNumber, int salary, int age) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.position = position;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.salary = salary;
-        this.age = age;
-    }
 
     public void printInfoEmployee() {
         System.out.println("ФИО: " + lastName + " " + firstName + " " + middleName + "\nПозиция: " + position +
