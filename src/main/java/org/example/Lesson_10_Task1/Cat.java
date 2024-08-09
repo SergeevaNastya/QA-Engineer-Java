@@ -1,6 +1,5 @@
-package org.example.Lesson_10;
+package org.example.Lesson_10_Task1;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,11 +7,10 @@ import lombok.Setter;
 @Setter
 public class Cat extends Animal {
     private static final int MAX_RUN_LENGTH = 200;
+    public static final int MIN_FOOD = 25;
     @Getter
     private static int catCount = 0;
-    int foodCount;
     private boolean isFull;
-    int minimumFood = 25;
 
     public Cat(String name) {
         super(name);
@@ -35,11 +33,11 @@ public class Cat extends Animal {
         System.out.println(name + " не умеет плавать.");
     }
 
-    public void eat(int foodCount){
-        if (foodCount < 0){
+    public void eat(int foodCount) {
+        if (foodCount < 0) {
             throw new IllegalArgumentException("Количество еды не может быть отрицательным!");
         }
-        if (foodCount < minimumFood){
+        if (foodCount < MIN_FOOD) {
             System.out.println("Не хватило еды для " + name);
             return;
         }

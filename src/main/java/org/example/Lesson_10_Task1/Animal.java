@@ -1,4 +1,4 @@
-package org.example.Lesson_10;
+package org.example.Lesson_10_Task1;
 
 import lombok.Data;
 import lombok.Getter;
@@ -7,7 +7,6 @@ import lombok.Getter;
 abstract public class Animal {
     String name;
     int obstacleLength;
-    // Метод для получения количества всех животных
     @Getter
     public static int animalCount = 0;
 

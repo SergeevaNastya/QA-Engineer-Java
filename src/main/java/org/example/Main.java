@@ -1,28 +1,41 @@
 package org.example;
 
-import org.example.Lesson_10.Animal;
-import org.example.Lesson_10.Cat;
-import org.example.Lesson_10.Dog;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import static org.example.Lesson_4.Lesson_4.*;
+import org.example.Lesson_10_Task1.Animal;
+import org.example.Lesson_10_Task1.Cat;
+import org.example.Lesson_10_Task1.Dog;
+import org.example.Lesson_10_Task1.FoodBowl;
+import org.example.Lesson_10_Task2.Circle;
+import org.example.Lesson_10_Task2.Rectangle;
+import org.example.Lesson_10_Task2.Triangle;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Барсик");
-        Cat cat2 = new Cat("Барсик");
-        cat.run(100);
-        cat.swim(50);
-        Dog dog = new Dog("Шарик");
-        dog.run(200);
-        dog.run(600);
-        dog.swim(100);
-        cat.eat(10);
-        System.out.println(cat.isFull());
+        // 1 задание
+        Cat[] cats = {
+                new Cat("Барсик"),
+                new Cat("Багет"),
+                new Cat("Мурзик"),
+                new Cat("Василий"),
+                new Cat("Снежок"),
+                new Cat("Персик")
+        };
         System.out.println("Количество созданных котов: " + Cat.getCatCount());
         System.out.println("Количество созданных собак: " + Dog.getDogCount());
         System.out.println("Количество созданных животных: " + Animal.getAnimalCount());
+        FoodBowl foodBowl = new FoodBowl(50);
+        foodBowl.addFood(100);
+        for (Cat cat : cats) {
+            foodBowl.reduceFood(Cat.MIN_FOOD);
+            cat.eat(Cat.MIN_FOOD);
+            System.out.println(cat.getName() + " сытость: " + cat.isFull());
+        }
+        System.out.println("Оставшееся количество еды в миске: " + foodBowl.getFoodCount());
+        // 2 задание
+        Triangle triangle = new Triangle("красный", "черный", 10, 15, 20);
+        Rectangle rectangle = new Rectangle("желтый", "черный", 20, 5);
+        Circle circle = new Circle("синий", "фиолетовый", 25);
+        triangle.printCalculation();
+        rectangle.printCalculation();
+        circle.printCalculation();
     }
 }

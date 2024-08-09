@@ -1,6 +1,5 @@
-package org.example.Lesson_10;
+package org.example.Lesson_10_Task1;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
