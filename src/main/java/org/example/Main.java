@@ -1,25 +1,45 @@
 package org.example;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import static org.example.Lesson_4.Lesson_4.*;
+import org.example.Lesson_10_Task1.Animal;
+import org.example.Lesson_10_Task1.Cat;
+import org.example.Lesson_10_Task1.Dog;
+import org.example.Lesson_10_Task1.FoodBowl;
+import org.example.Lesson_10_Task2.Circle;
+import org.example.Lesson_10_Task2.Rectangle;
+import org.example.Lesson_10_Task2.Triangle;
 
 public class Main {
     public static void main(String[] args) {
-        printSomeText();
-        checkSumSign();
-        printColor();
-        compareNumbers();
-        checkSumWithinBounds(100, 5);
-        checkPositiveOrNegative(0);
-        System.out.println(checkTrueOrFalse(10));
-        printStringMultipleTime("Hello", 5);
-        isLeapYear(1881);
-        toggleBit();
-        setArrayValues();
-        multiplyArray();
-        fillArray(3);
-        setArray(3, 0);
+        Cat[] cats = {
+                new Cat("Барсик"),
+                new Cat("Багет"),
+                new Cat("Мурзик"),
+                new Cat("Василий"),
+                new Cat("Снежок"),
+                new Cat("Персик")
+        };
+
+        System.out.println("Количество созданных котов: " + Cat.catCount);
+        System.out.println("Количество созданных собак: " + Dog.dogCount);
+        System.out.println("Количество созданных животных: " + Animal.animalCount);
+
+        FoodBowl foodBowl = new FoodBowl(50);
+        foodBowl.addFood(100);
+
+        for (Cat cat : cats) {
+            foodBowl.reduceFood(Cat.MIN_FOOD);
+            cat.eat(Cat.MIN_FOOD);
+            System.out.println(cat.getName() + " сытость: " + cat.isFull());
+        }
+
+        System.out.println("Оставшееся количество еды в миске: " + foodBowl.getFoodCount());
+
+        Triangle triangle = new Triangle("красный", "черный", 10, 15, 20);
+        Rectangle rectangle = new Rectangle("желтый", "черный", 20, 5);
+        Circle circle = new Circle("синий", "фиолетовый", 25);
+
+        triangle.printCalculation();
+        rectangle.printCalculation();
+        circle.printCalculation();
     }
 }
