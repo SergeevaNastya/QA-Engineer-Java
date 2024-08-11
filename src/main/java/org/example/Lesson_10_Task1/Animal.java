@@ -5,9 +5,8 @@ import lombok.Getter;
 
 @Data
 abstract public class Animal {
-    String name;
-    int obstacleLength;
-    @Getter
+    protected String name;
+    protected int obstacleLength;
     public static int animalCount = 0;
 
     public Animal(String name) {

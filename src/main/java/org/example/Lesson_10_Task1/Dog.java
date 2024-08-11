@@ -1,15 +1,12 @@
 package org.example.Lesson_10_Task1;
 
-import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
 public class Dog extends Animal {
     private static final int MAX_RUN_LENGTH = 500;
     private static final int MAX_SWIM_LENGTH = 10;
-    @Getter
-    private static int dogCount = 0;
+    public static int dogCount = 0;
 
     public Dog(String name) {
         super(name);

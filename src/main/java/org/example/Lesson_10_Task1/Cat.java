@@ -8,8 +8,7 @@ import lombok.Setter;
 public class Cat extends Animal {
     private static final int MAX_RUN_LENGTH = 200;
     public static final int MIN_FOOD = 25;
-    @Getter
-    private static int catCount = 0;
+    public static int catCount = 0;
     private boolean isFull;
 
     public Cat(String name) {

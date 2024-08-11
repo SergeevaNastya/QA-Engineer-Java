@@ -19,9 +19,9 @@ public class Main {
                 new Cat("Снежок"),
                 new Cat("Персик")
         };
-        System.out.println("Количество созданных котов: " + Cat.getCatCount());
-        System.out.println("Количество созданных собак: " + Dog.getDogCount());
-        System.out.println("Количество созданных животных: " + Animal.getAnimalCount());
+        System.out.println("Количество созданных котов: " + Cat.catCount);
+        System.out.println("Количество созданных собак: " + Dog.dogCount);
+        System.out.println("Количество созданных животных: " + Animal.animalCount);
         FoodBowl foodBowl = new FoodBowl(50);
         foodBowl.addFood(100);
         for (Cat cat : cats) {
