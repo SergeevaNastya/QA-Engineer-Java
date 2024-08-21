@@ -1,7 +1,7 @@
 package org.example.Lesson_12;
 
 public class Task {
-    public static void checkSize(String [][] array) throws MyArraySizeException {
+    public static void checkSize(String[][] array) throws MyArraySizeException {
         if (array.length != 4 || array[0].length != 4) {
             throw new MyArraySizeException("Ожидался массив размером 4x4");
         }
@@ -14,7 +14,7 @@ public class Task {
                 try {
                     sum += Integer.parseInt(string);
                 } catch (NumberFormatException e) {
-                    throw new MyArrayDataException("Преобразование не удалось");
+                    throw new MyArrayDataException("Преобразование не удалось. Некорректный символ: " + string);
                 }
             }
         }
