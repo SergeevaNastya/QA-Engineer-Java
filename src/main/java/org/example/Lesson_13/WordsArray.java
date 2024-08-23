@@ -1,14 +1,12 @@
 package org.example.Lesson_13;
 
 import lombok.Data;
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 public class WordsArray {
-    private Map<String, Integer> wordCount = new HashMap<>();
+    private Map<String, Integer> wordCount;
 
     public WordsArray(String[] words) {
         wordCount = new HashMap<>();
