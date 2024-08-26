@@ -1,7 +1,10 @@
 package org.example.Lesson_13;
 
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -19,8 +22,12 @@ public class WordsArray {
         }
     }
 
+    public List<String> getUniqueWords() {
+        return new ArrayList<>(wordCount.keySet());
+    }
+
     public void printWords() {
-        System.out.println("Уникальные слова: " + wordCount.keySet());
+        System.out.println("Уникальные слова: " + getUniqueWords());
         System.out.println("Количество каждого слова: " + getWordCount());
     }
 }
