@@ -1,11 +1,24 @@
 package org.example;
 
+import org.example.Lesson_13.PhoneBook;
+import org.example.Lesson_13.WordsArray;
 import org.example.Lesson_14_junit_5.FactorialJunit;
 
 public class Main {
     public static void main(String[] args) {
-        FactorialJunit factorial = new FactorialJunit();
+        String[] words = {"яблоко", "груша", "яблоко"};
 
-        System.out.println(factorial.getFactorial(0));
+        WordsArray wordsArray = new WordsArray(words);
+
+        wordsArray.printWords();
+
+        PhoneBook phoneBook = new PhoneBook();
+
+        phoneBook.add("Сергеева", "33-45-57");
+        phoneBook.add("Сергеева", "33-45-57"); // Дубликат, не будет добавлен
+        phoneBook.add("Виноградов", "55-85-99");
+        phoneBook.add("Виноградов", "55-85-99");
+
+        phoneBook.printBook();
     }
 }

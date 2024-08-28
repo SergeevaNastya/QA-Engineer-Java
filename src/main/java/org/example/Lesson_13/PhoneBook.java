@@ -5,22 +5,19 @@ import java.util.*;
 
 @Data
 public class PhoneBook {
-    private Map<String, List<String>> phoneBook;
+    private Map<String, Set<String>> phoneBook;
 
     public PhoneBook() {
         phoneBook = new HashMap<>();
     }
 
     public void add(String lastName, String phoneNumber){
-        List<String> phoneNumbers = phoneBook.get(lastName);
-        if (phoneNumbers == null) {
-            phoneNumbers = new ArrayList<>();
-            phoneBook.put(lastName, phoneNumbers);
-        }
+        Set<String> phoneNumbers = phoneBook.computeIfAbsent(lastName, k -> new HashSet<>());
         phoneNumbers.add(phoneNumber);
     }
 
-    public List<String> get(String lastName) {
-        return phoneBook.getOrDefault(lastName, Collections.emptyList());
+    public void printBook() {
+        phoneBook.forEach((lastName, phoneNumbers) ->
+                System.out.println(lastName + ": " + phoneNumbers));
     }
 }
