@@ -1,6 +1,6 @@
-package org.example.Lesson_14;
+package org.example.Lesson_14_junit_5;
 
-public class Factorial {
+public class FactorialJunit {
     public int getFactorial(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("Число не может быть отрицательным!");
