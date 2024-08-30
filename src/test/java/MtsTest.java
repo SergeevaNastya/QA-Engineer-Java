@@ -21,7 +21,8 @@ public class MtsTest {
         System.setProperty("webdriver.chrome.driver", "C:/Users/elka0/IdeaProjects/QA-Java/src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://www.mts.by/");
-        driver.manage().deleteAllCookies();
+        WebElement cookie_button = driver.findElement(By.xpath("//button[@id='cookie-agree']"));
+        cookie_button.click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
