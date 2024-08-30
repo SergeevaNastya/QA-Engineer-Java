@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,8 +21,12 @@ public class MtsTest {
         System.setProperty("webdriver.chrome.driver", "C:/Users/elka0/IdeaProjects/QA-Java/src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://www.mts.by/");
-        WebElement cookie_button = driver.findElement(By.xpath("//button[@id='cookie-agree']"));
-        cookie_button.click();
+        try {
+            WebElement cookie_button = driver.findElement(By.xpath("//button[@id='cookie-agree']"));
+            cookie_button.click();
+        } catch (NoSuchElementException e) {
+            System.out.println("Кнопка не найдена");
+        }
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
