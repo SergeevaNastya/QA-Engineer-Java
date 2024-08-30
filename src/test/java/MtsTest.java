@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -18,15 +19,11 @@ public class MtsTest {
 
     @BeforeEach
     public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
         System.setProperty("webdriver.chrome.driver", "C:/Users/elka0/IdeaProjects/QA-Java/src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.get("https://www.mts.by/");
-        try {
-            WebElement cookie_button = driver.findElement(By.xpath("//button[@id='cookie-agree']"));
-            cookie_button.click();
-        } catch (NoSuchElementException e) {
-            System.out.println("Кнопка не найдена");
-        }
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
