@@ -1,4 +1,4 @@
-package org.example.Lesson_10_Task2;
+package org.example.lesson10Task2;
 
 import lombok.Data;
 

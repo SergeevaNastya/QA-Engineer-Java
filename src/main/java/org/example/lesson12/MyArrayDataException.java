@@ -1,4 +1,4 @@
-package org.example.Lesson_12;
+package org.example.lesson12;
 
 public class MyArrayDataException extends Exception {
     public MyArrayDataException(String message) {

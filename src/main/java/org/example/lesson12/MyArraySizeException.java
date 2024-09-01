@@ -1,4 +1,4 @@
-package org.example.Lesson_12;
+package org.example.lesson12;
 
 public class MyArraySizeException extends Exception {
     public MyArraySizeException(String message) {

@@ -1,4 +1,4 @@
-package org.example.Lesson_12;
+package org.example.lesson12;
 
 public class Task {
     public static int sum = 0;

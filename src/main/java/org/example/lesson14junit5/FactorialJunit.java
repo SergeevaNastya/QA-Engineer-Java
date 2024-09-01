@@ -1,4 +1,4 @@
-package org.example.Lesson_14_junit_5;
+package org.example.lesson14junit5;
 
 public class FactorialJunit {
     public int getFactorial(int number) {

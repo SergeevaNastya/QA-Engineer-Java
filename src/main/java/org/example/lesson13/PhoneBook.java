@@ -1,4 +1,4 @@
-package org.example.Lesson_13;
+package org.example.lesson13;
 
 import lombok.Data;
 import java.util.*;

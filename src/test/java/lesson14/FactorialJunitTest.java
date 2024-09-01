@@ -1,4 +1,6 @@
-import org.example.Lesson_14_junit_5.FactorialJunit;
+package lesson14;
+
+import org.example.lesson14junit5.FactorialJunit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package org.example.Lesson_5;
+package org.example.lesson5;
 
 import lombok.Data;
 

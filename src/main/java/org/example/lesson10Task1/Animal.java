@@ -1,7 +1,6 @@
-package org.example.Lesson_10_Task1;
+package org.example.lesson10Task1;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 abstract public class Animal {
