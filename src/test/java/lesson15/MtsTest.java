@@ -1,24 +1,18 @@
 package lesson15;
 
+import org.example.lesson16.MtsPage;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MtsTest {
-    public static WebDriver driver;
-    public static WebDriverWait wait;
+    public WebDriver driver;
+    public MtsPage mtsPage;
 
     @BeforeEach
     public void setUp() {
@@ -27,27 +21,22 @@ public class MtsTest {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver(options);
         driver.get("https://www.mts.by/");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        try {
-            WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='cookie-agree']")));
-            cookieButton.click();
-        } catch (TimeoutException e) {
-            System.out.println("Кнопка согласия с куками не появилась.");
-        }
+        mtsPage = new MtsPage(driver);
+        mtsPage.acceptCookies();
     }
 
     @Test
     @Order(1)
+    @DisplayName("Проверка валидного названия блока")
     public void testTitle() {
-        WebElement blockTitle = driver.findElement(By.xpath(("//h2[contains(., 'Онлайн пополнение') and contains(., 'без комиссии')]")));
-        assertEquals("Онлайн пополнение без комиссии", blockTitle.getText().replace("\n", " "), "Название не соответствует ожидаемому.");
+        assertEquals("Онлайн пополнение без комиссии", mtsPage.getBlockTitle(), "Название не соответствует ожидаемому.");
     }
 
     @Test
     @Order(2)
+    @DisplayName("Проверка логотипов")
     public void testLogo() {
-        List<WebElement> logos = driver.findElements(By.xpath("//div[@class='pay__partners']//img"));
-        assertFalse(logos.isEmpty(), "Логотипы не найдены.");
+        List<WebElement> logos = mtsPage.getLogos();
         for (WebElement logo : logos) {
             assertTrue(logo.isDisplayed(), "Один из логотипов не отображается.");
             String src = logo.getAttribute("src");
@@ -57,25 +46,91 @@ public class MtsTest {
 
     @Test
     @Order(3)
+    @DisplayName("Проверка ссылки")
     public void testLink() {
-        WebElement link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div/a[text()='Подробнее о сервисе']")));
-        link.click();
-        String expectedTitle = "Порядок оплаты и безопасность интернет платежей"; // Замените на ожидаемый заголовок
+        mtsPage.clickLink();
+        String expectedTitle = "Порядок оплаты и безопасность интернет платежей";
         String actualTitle = driver.getTitle();
         assertEquals(actualTitle, expectedTitle, "Заголовок страницы не соответствует ожидаемому");
     }
 
     @Test
     @Order(4)
+    @DisplayName("Проверка кнопки - Продолжить")
     public void testButton() {
-        WebElement inputPhone = driver.findElement(By.xpath("//div/input[@id='connection-phone']"));
-        inputPhone.sendKeys("297777777");
-        WebElement inputSum = driver.findElement(By.xpath("//div/input[@id='connection-sum']"));
-        inputSum.sendKeys("1");
-        WebElement inputButton = driver.findElement(By.xpath("//form[@id='pay-connection']//button"));
-        inputButton.click();
-        WebElement block = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='bepaid-app']")));
-        Assertions.assertNotNull(block, "Окно не появился после нажатия кнопки");
+        mtsPage.getPhoneSum("297777777", "1");
+        mtsPage.clickButton();
+        mtsPage.isBlockVisible();
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Проверка плейсхолдеров в блоке - Услуги связи")
+    public void testPlaceholderPayConnection() {
+        assertEquals("Номер телефона", mtsPage.getPlaceholder(mtsPage.getConnectionPhone()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("Сумма", mtsPage.getPlaceholder(mtsPage.getConnectionSum()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("E-mail для отправки чека", mtsPage.getPlaceholder(mtsPage.getConnectionEmail()), "Плейсхолдер не соответствует ожидаемому");
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Проверка плейсхолдеров в блоке - Домашний интернет")
+    public void testPlaceholderPayInternet() {
+        assertEquals("Номер абонента", mtsPage.getPlaceholder(mtsPage.getInternetPhone()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("Сумма", mtsPage.getPlaceholder(mtsPage.getInternetSum()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("E-mail для отправки чека", mtsPage.getPlaceholder(mtsPage.getInternetEmail()), "Плейсхолдер не соответствует ожидаемому");
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Проверка плейсхолдеров в блоке - Рассрочка")
+    public void testPlaceholderPayInstalment() {
+        assertEquals("Номер счета на 44", mtsPage.getPlaceholder(mtsPage.getScoreInstalment()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("Сумма", mtsPage.getPlaceholder(mtsPage.getInstalmentSum()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("E-mail для отправки чека", mtsPage.getPlaceholder(mtsPage.getInstalmentEmail()), "Плейсхолдер не соответствует ожидаемому");
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("Проверка плейсхолдеров в блоке - Задолженность")
+    public void testPlaceholderPayArrears() {
+        assertEquals("Номер счета на 2073", mtsPage.getPlaceholder(mtsPage.getScoreArrears()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("Сумма", mtsPage.getPlaceholder(mtsPage.getArrearsSum()), "Плейсхолдер не соответствует ожидаемому");
+        assertEquals("E-mail для отправки чека", mtsPage.getPlaceholder(mtsPage.getArrearsEmail()), "Плейсхолдер не соответствует ожидаемому");
+    }
+
+    @Test
+    @Order(9)
+    @DisplayName("Проверка введеных данных в фрейме")
+    public void testDataFrame() {
+        mtsPage.switchToFrame(mtsPage.getFrameLocator());
+        assertTrue(mtsPage.getTextSum(mtsPage.getSumText()).contains("1.00 BYN"), "Сумма не соответствует");
+        assertTrue(mtsPage.getTextSum(mtsPage.getSumButton()).contains("1.00 BYN"), "Сумма не соответствует");
+        assertTrue(mtsPage.getTextSum(mtsPage.getPhoneFrame()).contains("375297777777"), "Номер телефона не соответствует");
+    }
+
+    @Test
+    @Order(10)
+    @DisplayName("Проверка надписей в реквизитах")
+    public void testLabels() {
+        mtsPage.switchToFrame(mtsPage.getFrameLocator());
+        assertEquals("Номер карты", mtsPage.getLabel(mtsPage.getCardLabel()), "Надпись не соответствует ожидаемому");
+        assertEquals("Срок действия", mtsPage.getLabel(mtsPage.getDateLabel()), "Надпись не соответствует ожидаемому");
+        assertEquals("CVC", mtsPage.getLabel(mtsPage.getCvcLabel()), "Надпись не соответствует ожидаемому");
+        assertEquals("Имя держателя (как на карте)", mtsPage.getLabel(mtsPage.getNameLabel()), "Надпись не соответствует ожидаемому");
+    }
+
+    @Test
+    @Order(11)
+    @DisplayName("Проверка наличия иконок в фрейме")
+    public void testIconsFrame() {
+        List<WebElement> icons = mtsPage.getIconsFrame();
+        mtsPage.switchToFrame(mtsPage.getFrameLocator());
+        for (WebElement icon : icons) {
+            assertTrue(icon.isDisplayed(), "Один из логотипов не отображается.");
+            String src = icon.getAttribute("src");
+            assertTrue(src.contains("assets/images/payment-icons/card-types/"), "Источник не соответствует");
+        }
     }
 
     @AfterEach
