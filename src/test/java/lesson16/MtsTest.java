@@ -1,4 +1,4 @@
-package lesson15;
+package lesson16;
 
 import org.example.lesson16.MtsPage;
 import org.junit.jupiter.api.*;
