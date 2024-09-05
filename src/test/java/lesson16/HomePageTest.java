@@ -1,6 +1,8 @@
 package lesson16;
 
-import org.example.lesson16.MtsPage;
+import org.example.lesson16.HomePage;
+import org.example.lesson16.HomePageSteps;
+import org.example.lesson16.PaySectionBuilder;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,9 +12,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class MtsTest {
+public class HomePageTest {
     public WebDriver driver;
-    public MtsPage mtsPage;
+    public HomePage mtsPage;
+    public HomePageSteps mtsSteps;
 
     @BeforeEach
     public void setUp() {
@@ -21,7 +24,8 @@ public class MtsTest {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver(options);
         driver.get("https://www.mts.by/");
-        mtsPage = new MtsPage(driver);
+        mtsPage = new HomePage(driver);
+        mtsSteps = new HomePageSteps(mtsPage);
         mtsPage.acceptCookies();
     }
 
@@ -58,8 +62,12 @@ public class MtsTest {
     @Order(4)
     @DisplayName("Проверка кнопки - Продолжить")
     public void testButton() {
-        mtsPage.getPhoneSum("297777777", "1");
-        mtsPage.clickButton();
+        PaySectionBuilder object = PaySectionBuilder.builder()
+                        .paymentSum("1")
+                        .specialField("297777777")
+                        .build();
+        mtsSteps.fillPaymentSection(object);
+        mtsSteps.clickContinueButton();
         mtsPage.isBlockVisible();
     }
 

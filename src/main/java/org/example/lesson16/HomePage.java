@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.util.List;
 
 @Data
-public class MtsPage {
+public class HomePage {
     private WebDriver driver;
     private WebDriverWait wait;
     private By cookieButton = By.xpath("//button[@id='cookie-agree']");
@@ -44,7 +44,7 @@ public class MtsPage {
     private By arrearsSum = By.id("arrears-sum");
     private By arrearsEmail = By.id("arrears-email");
 
-    public MtsPage(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
@@ -74,8 +74,10 @@ public class MtsPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(link)).click();
     }
 
-    public void getPhoneSum(String phone, String sum) {
+    public void fillPhoneField(String phone) {
         driver.findElement(inputPhone).sendKeys(phone);
+    }
+    public void fillSumField(String sum) {
         driver.findElement(inputSum).sendKeys(sum);
     }
 
@@ -96,7 +98,8 @@ public class MtsPage {
     }
 
     public void switchToFrame(By frameLocator) {
-        getPhoneSum("297777777", "1");
+        fillPhoneField("297777777");
+        fillSumField("1");
         clickButton();
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameLocator));
     }
