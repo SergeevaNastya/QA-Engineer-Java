@@ -77,6 +77,7 @@ public class HomePage {
     public void fillPhoneField(String phone) {
         driver.findElement(inputPhone).sendKeys(phone);
     }
+
     public void fillSumField(String sum) {
         driver.findElement(inputSum).sendKeys(sum);
     }

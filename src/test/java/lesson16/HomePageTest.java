@@ -52,7 +52,7 @@ public class HomePageTest {
     @Order(3)
     @DisplayName("Проверка ссылки")
     public void testLink() {
-        mtsPage.clickLink();
+        mtsSteps.clickLink();
         String expectedTitle = "Порядок оплаты и безопасность интернет платежей";
         String actualTitle = driver.getTitle();
         assertEquals(actualTitle, expectedTitle, "Заголовок страницы не соответствует ожидаемому");
